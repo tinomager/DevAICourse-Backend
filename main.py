@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from generated.models.pet import Pet
 from generated.models.category import Category
+from generated.models.tag import Tag
 
 app = FastAPI()
 
@@ -31,6 +32,15 @@ async def get_category(category_id: int):
     # Create dummy category
     dummy_category = Category(id=category_id, name="Sample Category")
     return dummy_category
+
+@app.get("/tags/{tag_id}", response_model=Tag)
+async def get_tag(tag_id: int):
+    dummy_tag = Tag(id=tag_id, name="Sample Tag")
+    return dummy_tag
+
+@app.post("/tags", response_model=Tag)
+async def create_tag(tag: Tag):
+    return tag
 
 if __name__ == "__main__":
     import uvicorn
