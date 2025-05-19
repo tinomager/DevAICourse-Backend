@@ -23,8 +23,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from category import Category
-from tag import Tag
+from generated.models.category import Category
+from generated.models.tag import Tag
 try:
     from typing import Self
 except ImportError:
