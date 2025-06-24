@@ -35,6 +35,8 @@ tags:
       url: https://swagger.io
   - name: user
     description: Operations about user
+  - name: category
+    description: Everything about the Pet categories.
 paths:
   /pet:
     put:
@@ -665,6 +667,115 @@ paths:
           description: User not found
         default:
           description: Unexpected error
+  /category:
+    put:
+      tags:
+        - category
+      summary: Update an existing category.
+      description: Update an existing category by Id.
+      operationId: updateCategory
+      requestBody:
+        description: Update an existent category in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Category'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    post:
+      tags:
+        - category
+      summary: Add a new category to the store.
+      description: Add a new category to the store.
+      operationId: addCategory
+      requestBody:
+        description: Create a new category in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Category'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /categories:
+    get:
+      tags:
+        - category
+      summary: Get all categories.
+      description: Get all categories.
+      operationId: getAllCategories
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+      security:
+        - petstore_auth:
+            - read:pets
 components:
   schemas:
     Order:
