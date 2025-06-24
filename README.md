@@ -8,11 +8,13 @@ The main goal of this repository is to provide a step-by-step learning resource 
 
 ## Task
 
-For each stage of the project, your goal is to incrementally implement the required features and improvements as described in the stage documentation. Use an AI coding assistant (such as GitHub Copilot or a dedicated model) to help you:
+For each stage of the project, your goal is to incrementally implement the required features and improvements as described in the stage documentation. Use an AI coding assistant (such as GitHub Copilot or a dedicated model) to help you and try to avoid as far as possible to implement the required changes completly by hand.
+
+For each stage you should:
 
 1. Understand the Requirements: Carefully read the description and goals for the current stage.
 2. Plan the Changes: Identify which files and code sections need to be added or modified. You can also use a code agent and let it decide where to make changes - but carefully review, what the agent does
-3. Interact with the AI Assistant: Ask the assistant for code snippets, explanations, or best practices relevant to the stage. Request code reviews or suggestions for improvements. Use the assistant to generate boilerplate code, unit tests, or documentation as needed.
+3. Interact with the AI Assistant: Ask the assistant for code snippets, explanations, or best practices relevant to the stage. Request code reviews or suggestions for improvements. Use the assistant to generate boilerplate code, unit tests, or documentation as needed. Hint: In Roo Code you can change the mode how the agent works between different modi. Check them our. Or use Continue for chatting with the AI.
 4. Implement and Test: Apply the suggested changes to your codebase. Test the new functionality to ensure it meets the requirements. Hint: Some code agents like Roo Code also test whether implemented changes work.
 5. Compare your changes with the suggested state in the State branches. Due to usage of the AI, your code does not neccessary look like the solution given in the stage.
 
@@ -29,7 +31,7 @@ The repository is divided into different stages, each represented by a branch or
    - Hint: Try to generate models directly with help of the AI and also try to make use of CLI tools to generate the models.
 
 3. **Stage 2: FastAPI**
-   - Implement basic CRUD for pets, categories, and users as basis for frontend
+   - Implement basic CRUD for pets, categories, and tags as basis for frontend
    - Make usage of FastAPI and Uvicorn Webserver
    - Introduce main.py file as a runnable starting point for the project
    - API works with dummy data
@@ -40,5 +42,7 @@ The repository is divided into different stages, each represented by a branch or
    - Connects the API to the database and read and write data
    - Hint: Check the DB schema for SQL best practices.
 
-5. **Stage 4: Connect to frontend**
+5. **Stage 4: Connect to frontend and make production ready**
    - Add CORS support for frontend integration.
+   - Add a service or repository layer for separation of concerns
+   - Let you suggest some useful tests and implement them
