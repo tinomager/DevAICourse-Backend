@@ -5,4 +5,4 @@ services:
     ports:
       - "12000:8000"
     volumes:
-      - /var/ai/github/tinomager/DevAICourse-Backend/app.db:/app/data/app.db
+      - /var/ai/github/tinomager/DevAICourse-Backend/data/app.db:/app/data/app.db
