@@ -1,0 +1,8 @@
+services:
+  app:
+    image: fastapi-petstore  # Use environment variable or default to my-python-app:latest
+    container_name: fastapi-petstore
+    ports:
+      - "12000:8000"
+    volumes:
+      - /var/ai/github/tinomager/DevAICourse-Backend/app.db:/app/data/app.db

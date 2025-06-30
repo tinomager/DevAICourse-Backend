@@ -46,3 +46,50 @@ The repository is divided into different stages, each represented by a branch or
    - Add CORS support for frontend integration.
    - Add a service or repository layer for separation of concerns
    - Let you suggest some useful tests and implement them
+
+## Python FastAPI Application with Docker
+
+This is a Python FastAPI application that uses SQLite as its database. The application is containerized using Docker.
+
+### Prerequisites
+
+- Docker installed on your machine
+
+### Building the Docker Image
+
+To build the Docker image, run the following command in the root directory of the project:
+
+```bash
+docker build -t fastapi-petstore .
+```
+
+### Running the Docker Container
+
+To run the Docker container, use the following command:
+
+```bash
+docker run -d -p 12000:8000 fastapi-petstore
+```
+
+This will start the application and map port 8000 of the container to port 12000 on your host machine.
+
+### Accessing the Application
+
+Once the container is running, you can access the application at:
+
+```
+http://localhost:12000/docs
+```
+
+### Stopping the Docker Container
+
+To stop the running container, first find the container ID using:
+
+```bash
+docker ps
+```
+
+Then stop the container using:
+
+```bash
+docker stop <container_id>
