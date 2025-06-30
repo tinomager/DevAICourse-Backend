@@ -12,43 +12,46 @@ class PetService:
             cursor = conn.cursor()
 
             # Insert or update category if it exists
+            category_id = None
             if pet.category:
                 if pet.category.id is None or pet.category.id == 0:
                     cursor.execute('SELECT MAX(id) FROM categories')
                     max_id_row = cursor.fetchone()
                     category_id = (max_id_row[0] or 0) + 1
+                    pet.category.id = category_id  # Set the category ID in the pet object
                 else:
                     category_id = pet.category.id
 
                 cursor.execute('INSERT OR IGNORE INTO categories (id, name) VALUES (?, ?)', (category_id, pet.category.name))
-            else:
-                category_id = None
 
             # Generate new ID if not provided
             if pet.id is None or pet.id == 0:
                 cursor.execute('SELECT MAX(id) FROM pets')
                 max_id_row = cursor.fetchone()
-                new_id = (max_id_row[0] or 0) + 1
+                pet.id = (max_id_row[0] or 0) + 1  # Set the pet ID in the pet object
             else:
-                new_id = pet.id
+                pet.id = pet.id
 
             # Insert pet into database
             photo_urls_str = ','.join(pet.photo_urls) if pet.photo_urls else ''
             cursor.execute('''
                 INSERT INTO pets (id, name, category_id, photoUrls, status)
                 VALUES (?, ?, ?, ?, ?)
-            ''', (new_id, pet.name, category_id, photo_urls_str, pet.status))
+            ''', (pet.id, pet.name, category_id, photo_urls_str, pet.status))
 
             # Insert tags if they exist
             if pet.tags:
                 for tag in pet.tags:
+                    if tag.id is None or tag.id == 0:
+                        cursor.execute('SELECT MAX(id) FROM tags')
+                        max_id_row = cursor.fetchone()
+                        tag.id = (max_id_row[0] or 0) + 1  # Set the tag ID in the tag object
+                    else:
+                        tag.id = tag.id
                     cursor.execute('INSERT OR IGNORE INTO tags (id, name) VALUES (?, ?)', (tag.id, tag.name))
-                    cursor.execute('INSERT INTO pet_tags (pet_id, tag_id) VALUES (?, ?)', (new_id, tag.id))
+                    cursor.execute('INSERT INTO pet_tags (pet_id, tag_id) VALUES (?, ?)', (pet.id, tag.id))
 
             conn.commit()
-
-            # Return pet with the generated ID
-            pet.id = new_id
         return pet
 
     @staticmethod
@@ -123,7 +126,7 @@ class PetService:
                     id=id,
                     name=name,
                     category=category,
-                    photo_urls=photo_urls,
+                    photoUrls=photo_urls,  # Use the alias name here
                     tags=tags,
                     status=status
                 )
@@ -179,7 +182,7 @@ class PetService:
                         id=id,
                         name=name,
                         category=category,
-                        photo_urls=photo_urls,
+                        photoUrls=photo_urls,  # Use the alias name here
                         tags=tags_list,
                         status=status
                     )
@@ -224,7 +227,7 @@ class PetService:
                 id=pet_id,
                 name=name,
                 category=category,
-                photo_urls=photo_urls,
+                photoUrls=photo_urls,  # Use the alias name here
                 tags=tags,
                 status=status
             )

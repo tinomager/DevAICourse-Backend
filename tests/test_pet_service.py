@@ -16,7 +16,7 @@ def sample_pet():
         id=1,
         name="Fluffy",
         category=Category(id=1, name="Cats"),
-        photo_urls=["url1", "url2"],
+        photoUrls=["url1", "url2"],
         tags=[Tag(id=1, name="cute")],
         status="available"
     )
